@@ -95,7 +95,7 @@ public class OperacionServiceImpl implements OperacionService {
 			 return oper.flatMap(c->{
 				 if(c.getNumero_cuenta().equalsIgnoreCase("")) 
 					{	
-						return Mono.error(new InterruptedException("No existe Numero de tarjeta"));
+						return Mono.error(new InterruptedException("No existe Numero de tarjeta.."));
 					}
 					
 			TypeOperation tipo=new TypeOperation();

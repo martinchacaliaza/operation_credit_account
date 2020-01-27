@@ -22,8 +22,8 @@ import com.example.app.models.OperationCreditAccount;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
-
+@RestController
+@RequestMapping("/api/OperCuentasCreditos")
 public class WebClientController {
 	@Value("${com.bootcamp.gateway.url}")
 	String valor;
@@ -38,13 +38,14 @@ public class WebClientController {
 			.build(); 		 
 	}
 	
-  
+	/*@GetMapping("/ProductoBancario/{dniCliente}")
    public Flux<Client> getCliente(@PathVariable String dniCliente) 
    { 
 		return webClient.get().uri("/dni/"+dniCliente).retrieve().bodyToFlux(Client.class); 
    }
-  
-	
+  */
+
+   @GetMapping("/cuentacredito/")
    public Mono<CreditAccount> cosumo( String numero_cuenta,  Double monto) 
    { 
 		return webClient.put().uri("/consumo/"+numero_cuenta+"/"+monto).retrieve().bodyToMono(CreditAccount.class); 

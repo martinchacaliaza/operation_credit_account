@@ -39,6 +39,7 @@ public class OperacionServiceImpl implements OperacionService {
 	@Value("${com.bootcamp.gateway.url}")
 	String valor;
 	
+
 	WebClientController web;
 	
 	
@@ -83,14 +84,13 @@ public class OperacionServiceImpl implements OperacionService {
 	public Mono<OperationCreditAccount> saveOperacionRetiro(OperationCreditAccount operacion) 
 	{
 	
-		 Mono<CreditAccount> oper= web.cosumo(operacion.getNumero_cuenta(), operacion.getMontoPago());
-				/* WebClient
+		 Mono<CreditAccount> oper= 	WebClient
 					.builder()
 					.baseUrl("http://"+valor+"/productos_creditos/api/ProductoCredito/")
 					.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
 					.build().put().uri("/consumo/"+operacion.getNumero_cuenta()+"/"+operacion.getMontoPago()).retrieve()
 					.bodyToMono(CreditAccount.class)
-					.log();*/
+					.log();
 				 
 			 return oper.flatMap(c->{
 				 if(c.getNumero_cuenta().equalsIgnoreCase("")) 

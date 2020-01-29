@@ -88,7 +88,8 @@ public class OperacionServiceImpl implements OperacionService {
 					.builder()
 					.baseUrl("http://"+valor+"/productos_creditos/api/ProductoCredito/")
 					.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
-					.build().put().uri("/consumo/"+operacion.getNumero_cuenta()+"/"+operacion.getMontoPago()).retrieve()
+					.build().put().uri("/consumo/"+operacion.getNumero_cuenta()+"/"+
+					operacion.getMontoPago()+"/"+operacion.getCodigo_bancario()).retrieve()
 					.bodyToMono(CreditAccount.class)
 					.log();
 				 
@@ -99,8 +100,8 @@ public class OperacionServiceImpl implements OperacionService {
 					}
 					
 			TypeOperation tipo=new TypeOperation();
-			tipo.setIdTipo("1");	
-			tipo.setDescripcion("pago");
+			tipo.setIdTipo("2");	
+			tipo.setDescripcion("consumo");
 			operacion.setTipoOperacion(tipo);
 			return productoDao.save(operacion);
 		
@@ -115,7 +116,9 @@ public class OperacionServiceImpl implements OperacionService {
 						.builder()
 						.baseUrl("http://"+valor+"/productos_creditos/api/ProductoCredito/")
 						.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
-						.build().put().uri("/pago/"+operacion.getNumero_cuenta()+"/"+operacion.getMontoPago()).retrieve()
+						.build().put().uri("/pago/"+operacion.getNumero_cuenta()+"/"+
+						 operacion.getMontoPago()+"/"+operacion.getCodigo_bancario()).retrieve()
+						
 						.bodyToMono(CreditAccount.class)
 						.log();
 				 return oper.flatMap(c->{

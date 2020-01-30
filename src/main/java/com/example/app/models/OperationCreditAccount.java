@@ -25,7 +25,6 @@ public class OperationCreditAccount {
 
 	@NotEmpty
 	private String dni;
-	
 	@NotEmpty
 	private String codigo_bancario;
 	@NotEmpty

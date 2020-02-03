@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.app.models.TypeOperation;
+import com.example.app.models.TypeOperationCredit;
 import com.example.app.service.TipoOperacionService;
 
 import reactor.core.publisher.Flux;
@@ -27,7 +27,7 @@ public class TipoOperacionControllers {
 	private TipoOperacionService  tipoProductosService;
 	
 	@GetMapping
-	public Mono<ResponseEntity<Flux<TypeOperation>>> findAll() 
+	public Mono<ResponseEntity<Flux<TypeOperationCredit>>> findAll() 
 	{
 		return Mono.just(
 				ResponseEntity
@@ -39,7 +39,7 @@ public class TipoOperacionControllers {
 	
 	
 	@GetMapping("/{id}")
-	public Mono<ResponseEntity<TypeOperation>> viewId(@PathVariable String id){
+	public Mono<ResponseEntity<TypeOperationCredit>> viewId(@PathVariable String id){
 		return tipoProductosService.findByIdTipoProducto(id).map(p-> ResponseEntity.ok()
 				.contentType(MediaType.APPLICATION_JSON_UTF8)
 				.body(p))
@@ -47,7 +47,7 @@ public class TipoOperacionControllers {
 	}
 	
 	@PutMapping
-	public Mono<TypeOperation> updateProducto(@RequestBody TypeOperation tipoProducto)
+	public Mono<TypeOperationCredit> updateProducto(@RequestBody TypeOperationCredit tipoProducto)
 	{
 		//System.out.println(cliente.toString());
 		return tipoProductosService.saveTipoProducto(tipoProducto);
@@ -63,7 +63,7 @@ public class TipoOperacionControllers {
 	}
 	
 	@PostMapping
-	public Mono<TypeOperation> saveTipoProducto(@RequestBody TypeOperation tipoProducto)
+	public Mono<TypeOperationCredit> saveTipoProducto(@RequestBody TypeOperationCredit tipoProducto)
 	{
 		return tipoProductosService.saveTipoProducto(tipoProducto);
 	}	

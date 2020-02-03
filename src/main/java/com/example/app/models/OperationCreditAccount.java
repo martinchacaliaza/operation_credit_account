@@ -32,7 +32,7 @@ public class OperationCreditAccount {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaOperacion;
 	@NotEmpty
-	private TypeOperation tipoOperacion;
+	private TypeOperationCredit tipoOperacion;
 	@NotEmpty
 	private Double montoPago;
 	

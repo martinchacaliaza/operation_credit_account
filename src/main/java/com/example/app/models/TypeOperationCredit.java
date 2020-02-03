@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Document(collection ="tipoOperacion")
 
-public class TypeOperation {
+public class TypeOperationCredit {
 
 	
 	@NotEmpty

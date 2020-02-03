@@ -23,7 +23,7 @@ import com.example.app.dao.OperacionDao;
 import com.example.app.models.Client;
 import com.example.app.models.OperationCreditAccount;
 import com.example.app.models.CreditAccount;
-import com.example.app.models.TypeOperation;
+import com.example.app.models.TypeOperationCredit;
 import com.example.app.service.OperacionService;
 import com.example.app.service.TipoOperacionService;
 import com.sistema.app.exception.RequestException;
@@ -68,7 +68,7 @@ public class OperacionServiceImpl implements OperacionService {
 	
 	@Override
 	public Flux<OperationCreditAccount> findAllByIdOperacionDniCliente(String dni) {
-		return productoDao.viewDniCliente(dni);
+		return productoDao.findByDni(dni);
 
 	}
 
@@ -78,8 +78,6 @@ public class OperacionServiceImpl implements OperacionService {
 	return productoDao.save(producto);
 	}
 	
-	
-
 	@Override
 	public Mono<OperationCreditAccount> saveOperacionRetiro(OperationCreditAccount operacion) 
 	{
@@ -99,7 +97,7 @@ public class OperacionServiceImpl implements OperacionService {
 						return Mono.error(new InterruptedException("No existe Numero de tarjeta.."));
 					}
 					
-			TypeOperation tipo=new TypeOperation();
+			TypeOperationCredit tipo=new TypeOperationCredit();
 			tipo.setIdTipo("2");	
 			tipo.setDescripcion("consumo");
 			operacion.setTipoOperacion(tipo);
@@ -127,7 +125,7 @@ public class OperacionServiceImpl implements OperacionService {
 							return Mono.error(new InterruptedException("No existe Numero de tarjeta"));
 						}
 						
-				TypeOperation tipo=new TypeOperation();
+				TypeOperationCredit tipo=new TypeOperationCredit();
 				
 				/*tipo.setIdTipo(operacion.getTipoOperacion().getIdTipo());	
 				tipo.setDescripcion(operacion.getTipoOperacion().getDescripcion());*/
@@ -142,7 +140,7 @@ public class OperacionServiceImpl implements OperacionService {
 	@Override
 	public Flux<OperationCreditAccount> consultaMovimientos(String dni, String numTarjeta) {
 		
-		return productoDao.consultarMovimientos(dni, numTarjeta);
+		return productoDao.findByDniAndCuenta_origen(dni, numTarjeta);
 	}
 	
 	

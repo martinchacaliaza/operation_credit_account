@@ -19,13 +19,13 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.app.controllers.WebClientController;
-import com.example.app.dao.OperacionDao;
 import com.example.app.exception.RequestException;
 import com.example.app.exception.ResponseStatus;
 import com.example.app.models.Client;
 import com.example.app.models.OperationCreditAccount;
 import com.example.app.models.CreditAccount;
 import com.example.app.models.TypeOperationCredit;
+import com.example.app.repository.OperacionDao;
 import com.example.app.service.OperacionService;
 import com.example.app.service.TipoOperacionService;
 

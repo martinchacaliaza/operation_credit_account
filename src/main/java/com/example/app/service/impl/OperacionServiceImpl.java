@@ -17,11 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import com.example.app.controllers.WebClientController;
 import com.example.app.exception.RequestException;
 import com.example.app.exception.ResponseStatus;
-import com.example.app.models.Client;
 import com.example.app.models.OperationCreditAccount;
 import com.example.app.models.CreditAccount;
 import com.example.app.models.TypeOperationCredit;
@@ -38,10 +35,6 @@ public class OperacionServiceImpl implements OperacionService {
 	
 	@Value("${com.bootcamp.gateway.url}")
 	String valor;
-	
-
-	WebClientController web;
-	
 	
 	@Autowired
 	public OperacionDao productoDao;
@@ -85,14 +78,14 @@ public class OperacionServiceImpl implements OperacionService {
 		 Mono<CreditAccount> oper= 	WebClient
 					.builder()
 					.baseUrl("http://"+valor+"/productos_creditos/api/ProductoCredito/")
-					.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
-					.build().put().uri("/consumo/"+operacion.getNumero_cuenta()+"/"+
-					operacion.getMontoPago()+"/"+operacion.getCodigo_bancario()).retrieve()
+					//.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
+					.build().put().uri("/consumo/"+operacion.getNumeroCuenta()+"/"+
+					operacion.getMontoPago()+"/"+operacion.getCodigoBancario()).retrieve()
 					.bodyToMono(CreditAccount.class)
 					.log();
 				 
 			 return oper.flatMap(c->{
-				 if(c.getNumero_cuenta().equalsIgnoreCase("")) 
+				 if(c.getNumeroCuenta().equalsIgnoreCase("")) 
 					{	
 						return Mono.error(new InterruptedException("No existe Numero de tarjeta.."));
 					}
@@ -114,13 +107,13 @@ public class OperacionServiceImpl implements OperacionService {
 						.builder()
 						.baseUrl("http://"+valor+"/productos_creditos/api/ProductoCredito/")
 						.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE)
-						.build().put().uri("/pago/"+operacion.getNumero_cuenta()+"/"+
-						 operacion.getMontoPago()+"/"+operacion.getCodigo_bancario()).retrieve()
+						.build().put().uri("/pago/"+operacion.getNumeroCuenta()+"/"+
+						 operacion.getMontoPago()+"/"+operacion.getCodigoBancario()).retrieve()
 						
 						.bodyToMono(CreditAccount.class)
 						.log();
 				 return oper.flatMap(c->{
-						if(c.getNumero_cuenta() == null) 
+						if(c.getNumeroCuenta() == null) 
 						{	
 							return Mono.error(new InterruptedException("No existe Numero de tarjeta"));
 						}
@@ -138,11 +131,11 @@ public class OperacionServiceImpl implements OperacionService {
 	}
 
 	@Override
-	public Flux<OperationCreditAccount> consultaMovimientos(String dni, String numTarjeta) {
+	public Flux<OperationCreditAccount> findByDniAndNumeroCuenta(String dni, String numCuenta) {
 		
-		return productoDao.findByDniAndCuenta_origen(dni, numTarjeta);
+		return productoDao.findByDniAndNumeroCuenta(dni, numCuenta);
 	}
-	
+
 	
 
 }

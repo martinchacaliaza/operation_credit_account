@@ -1,11 +1,5 @@
 package com.example.app.models;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class CreditAccount {
 	private String id;
-	private String numero_cuenta;
+	private String numeroCuenta;
 	private String dni;
 	private TypeCreditAccount tipoProducto;
 	private String fecha_afiliacion;
@@ -25,7 +19,7 @@ public class CreditAccount {
 	private Double consumo;
 	private String usuario;
 	private String clave;
-	private String codigo_bancario;
+	private String codigoBancario;
 
 	
 	//private tipoProducto tipoCliente;

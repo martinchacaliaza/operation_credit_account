@@ -81,7 +81,7 @@ public class OperacionControllers {
 	@ApiOperation(value = "Muestra todos los movimientos bancarios por cliente y numero tarjeta(cuentas credito)" , notes="")
 	@GetMapping("/MovimientosBancarios/{dni}/{num_cuenta}")
 	public Flux<OperationCreditAccount> movimientosBancarios(@PathVariable String dni, @PathVariable String num_cuenta) {
-		Flux<OperationCreditAccount> oper = operacionService.consultaMovimientos(dni, num_cuenta);
+		Flux<OperationCreditAccount> oper = operacionService.findByDniAndNumeroCuenta(dni, num_cuenta);
 		return oper;
 	}
 }

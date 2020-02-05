@@ -24,9 +24,9 @@ public interface OperacionService {
 		
 	Mono<OperationCreditAccount> saveOperacionDeposito(OperationCreditAccount producto);
 
-	Flux<OperationCreditAccount> consultaMovimientos(String dni, String numTarjeta);
-
 	Mono<OperationCreditAccount> saveOperacionRetiro(OperationCreditAccount operacion);
+
+	Flux<OperationCreditAccount> findByDniAndNumeroCuenta(String dni, String num_cuenta);
 
 	
 

@@ -31,8 +31,8 @@ class ApplicationOperCreditTests {
 	@Test
 	public void listOper() {
 		oper.get().uri("/api/OperCuentasCreditos/")
-		.accept(MediaType.APPLICATION_JSON_UTF8).exchange().expectStatus()
-				.isOk().expectHeader().contentType(MediaType.APPLICATION_JSON_UTF8)
+		.accept().exchange().expectStatus()
+				.isOk().expectHeader().contentType(MediaType.APPLICATION_JSON)
 				.expectBodyList(OperationCreditAccount.class).consumeWith(response -> {
 					List<OperationCreditAccount> operas = response.getResponseBody();
 					operas.forEach(p -> {
@@ -48,9 +48,9 @@ class ApplicationOperCreditTests {
 	public void findAllOperByDniCliente() {
 		OperationCreditAccount cred = operService.findAllByIdOperacionDniCliente("72739839").blockFirst();
 		oper.get().uri("/api/OperCuentasCreditos/dni/{dni}", Collections.singletonMap("dni", cred.getDni()))
-				.accept(MediaType.APPLICATION_JSON_UTF8)
+				.accept()
 				.exchange().expectStatus().isOk().expectHeader()
-				.contentType(MediaType.APPLICATION_JSON_UTF8);
+				.contentType(MediaType.APPLICATION_JSON);
 	}
 
 }

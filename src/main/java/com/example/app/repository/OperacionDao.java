@@ -16,8 +16,6 @@ public interface OperacionDao extends ReactiveMongoRepository<OperationCreditAcc
 
 	Flux<OperationCreditAccount> findByDni(String dni);
 	
-	
-	@Query("{ 'dni' : ?0 , 'cuenta_origen' : ?1}")
-	Flux<OperationCreditAccount> findByDniAndCuenta_origen(String dni, String cuenta_origen);
-	
+	Flux<OperationCreditAccount> findByDniAndNumeroCuenta(String dni, String numeroCuenta);
+
 }

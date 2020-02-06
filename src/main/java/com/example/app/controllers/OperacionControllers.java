@@ -28,7 +28,10 @@ public class OperacionControllers {
 	@GetMapping
 	public Mono<ResponseEntity<Flux<OperationCreditAccount>>> findAll() {
 		return Mono.just(
-				ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(operacionService.findAllOperacion())
+				ResponseEntity
+				.ok()
+				//.contentType(MediaType.APPLICATION_JSON)
+				.body(operacionService.findAllOperacion())
 		);
 	}
 	
@@ -36,15 +39,18 @@ public class OperacionControllers {
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<OperationCreditAccount>> viewId(@PathVariable String id) {
 		return operacionService.findByIdOperacion(id)
-				.map(p -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(p))
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+				.map(p -> ResponseEntity
+				.ok()
+				//.contentType(MediaType.APPLICATION_JSON)
+				.body(p))
+				.defaultIfEmpty(ResponseEntity.notFound()
+				.build());
 	}
 
 	@ApiOperation(value = "Actualiza operacion con el numero de id, si no existe el id vuelve a crearlo" , notes="")
 	@PutMapping
 	public Mono<OperationCreditAccount> updateProducto(@RequestBody OperationCreditAccount oper) {
-		System.out.println(oper.toString());
-		return operacionService.saveOperacion(oper);
+			return operacionService.saveOperacion(oper);
 	}
 	
 
@@ -66,7 +72,6 @@ public class OperacionControllers {
 			+ " Y Actualiza el saldo de la tarjetae" , notes="")
 	@PostMapping("/consumo")
 	public Mono<OperationCreditAccount> saveOperacionRetiro(@RequestBody OperationCreditAccount oper) {
-		//System.out.println(producto.toString());
 		return operacionService.saveOperacionRetiro(oper);
 	}
 
@@ -74,7 +79,6 @@ public class OperacionControllers {
 			+ " Y Actualiza el saldo de la tarjeta" , notes="")
 	@PostMapping("/pago")
 	public Mono<OperationCreditAccount> saveOperacionDeposito(@RequestBody OperationCreditAccount producto) {
-		//System.out.println(producto.toString());
 		return operacionService.saveOperacionDeposito(producto);
 	}
 
